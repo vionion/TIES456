@@ -26,8 +26,8 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("code", request.getParameter("code"));
-		request.getRequestDispatcher("/page1.jsp").forward(request,response);
+		request.getSession().setAttribute("accessToken", request.getParameter("code"));
+		request.getRequestDispatcher("/buttons.jsp").forward(request,response);
 	}
 
 	/**
