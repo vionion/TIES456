@@ -1,3 +1,21 @@
 #file {
     display: none;
 }
+
+.center{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+.messageBox{
+    position: fixed;
+    left: 40%;
+}
+
+.buttons{
+    border: double black medium;
+    position: fixed;
+    left: 40%;
+    top: 15%;
+ }

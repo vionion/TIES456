@@ -58,10 +58,10 @@
                     if (status == 200) {
                         var json = JSON.parse(rep);
                         token = json.access_token;
-                        document.getElementById("token_display").textContent = token;
+                        document.getElementById("messageWindow").textContent = "Token: " + token;
                     } else {
                         //Display error
-                        document.getElementById("token_display").textContent = "ERROR : No Token";
+                        document.getElementById("messageWindow").textContent = "ERROR : No Token";
                         console.log(rep);
                     }
                 });
@@ -105,7 +105,7 @@
                 } else {
                     //Display error
                     var json = JSON.parse(rep);
-                    document.getElementById("token_display").textContent = "ERROR!";
+                    document.getElementById("messageWindow").textContent = "ERROR!";
                     console.log(json);
                 }
 
@@ -148,7 +148,7 @@
 
                 } else {
                     //Display error
-                    document.getElementById("token_display").textContent = "ERROR!";
+                    document.getElementById("messageWindow").textContent = "ERROR!";
                     var json = JSON.parse(rep);
                     console.log(json);
                 }
@@ -172,11 +172,11 @@
                 if (status == 200) {
                     var json = JSON.parse(rep);
                     console.log(json);
-                    document.getElementById("token_display").textContent = "File with name " + json.path +
+                    document.getElementById("messageWindow").textContent = "File with name " + json.path +
                             " (" + json.size + ") successfully uploaded!";
                 } else {
                     //Display error
-                    document.getElementById("token_display").textContent = "ERROR!";
+                    document.getElementById("messageWindow").textContent = "ERROR!";
                     var json = JSON.parse(rep);
                     console.log(json);
                 }
@@ -222,6 +222,7 @@
 
                 } else {
                     //Display error
+                    document.getElementById("messageWindow").textContent = "ERROR!";
                     var json = JSON.parse(rep);
                     console.log(json);
                 }
@@ -237,17 +238,33 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<span><button onclick="getToken()">Get Token</button><span>Token:</span><span id="token_display">Click on "Get token" to retrieve the token</span></span>
-<br/>
-<button onclick="getAccountInfo()">Get Account Info</button>
-<form enctype="multipart/form-data" method="post" action="javascript:uploadFile();">
-    <input type="button" id="get_file" value="choose file" onclick="chooseFile()">
-    <input type="file" name="file" id="file">
-    <input type="submit" value="Upload">
-</form>
-<button onclick="javascript:getFolderMetadata()">Get root folder metadata</button>
-<input type="text" id="searchQuery">
-<button onclick="javascript:search()">Search files</button>
+    <span id="messageWindow" class="messageBox">Click on "Get token" to retrieve the token</span>
+    <table class="buttons">
+        <tr><th>
+            <button onclick="getToken()">Get Token</button>
+        </th></tr>
+
+        <tr><th>
+            <button onclick="getAccountInfo()">Get Account Info</button>
+        </th></tr>
+
+        <tr><th>
+            <form enctype="multipart/form-data" method="post" action="javascript:uploadFile();">
+                <input type="button" id="get_file" value="Choose file" onclick="chooseFile()">
+                <input type="file" name="file" id="file">
+                <input type="submit" value="Upload">
+            </form>
+        </th></tr>
+
+        <tr><th>
+            <button onclick="javascript:getFolderMetadata()">Get root folder metadata</button>
+        </th></tr>
+
+        <tr><th>
+            <input type="text" id="searchQuery">
+            <button onclick="javascript:search()">Search files</button>
+        </th></tr>
+    </table>
 <table style="visibility:hidden" id="accountInfoContainer">
 </table>
 </body>
