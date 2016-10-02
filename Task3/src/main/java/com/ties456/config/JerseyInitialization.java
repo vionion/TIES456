@@ -8,5 +8,6 @@ public class JerseyInitialization extends ResourceConfig {
      */
     public JerseyInitialization(){
         this.packages("com.ties456.resources");
+        this.packages("com.ties456.error");
     }
 }

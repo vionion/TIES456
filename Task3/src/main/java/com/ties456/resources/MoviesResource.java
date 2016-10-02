@@ -1,6 +1,7 @@
 package com.ties456.resources;
 
 
+import com.ties456.error.exception.MyNotFoundException;
 import com.ties456.model.movies.Studio;
 import com.ties456.service.DirectorService;
 import com.ties456.service.MovieService;
@@ -35,7 +36,6 @@ public class MoviesResource {
     private DirectorService actorService;
 
     @GET
-    @Path("/")
     public List<Studio> getAll() {
         return studioService.getAll();
     }
@@ -51,7 +51,7 @@ public class MoviesResource {
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PUT
     public ResponseEntity<Studio> createStudio(@RequestBody Studio studio) {
         if (studioService.isStudioExist(studio.getId())) {
             return new ResponseEntity<Studio>(HttpStatus.CONFLICT);
@@ -60,8 +60,9 @@ public class MoviesResource {
         return new ResponseEntity<Studio>(result, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Studio> updateStudio(@PathVariable("id") long id, @RequestBody Studio studioToUpdate) {
+    @POST
+    @Path("/{id}")
+    public ResponseEntity<Studio> updateStudio(@PathParam("id") long id, @RequestBody Studio studioToUpdate) {
         Studio currentStudio = studioService.getById(id);
         if (currentStudio == null) {
             return new ResponseEntity<Studio>(HttpStatus.NOT_FOUND);
@@ -71,20 +72,31 @@ public class MoviesResource {
         return new ResponseEntity<Studio>(currentStudio, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Studio> deleteStudio(@PathVariable("id") long id) {
+    @DELETE
+    @Path("/{id}")
+    public ResponseEntity<Studio> deleteStudio(@PathParam("id") long id) {
+        if (id < 0) {
+            throw new MyNotFoundException("Dude, try to be more positive!");
+        }
         Studio studio = studioService.getById(id);
         if (studio == null) {
-            return new ResponseEntity<Studio>(HttpStatus.NOT_FOUND);
+            throw new MyNotFoundException("There is no studio with such strange id");
+//            return new ResponseEntity<Studio>(HttpStatus.NOT_FOUND);
         }
         studioService.deleteStudioById(id);
         return new ResponseEntity<Studio>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.DELETE)
+    @DELETE
     public ResponseEntity<Studio> deleteAllStudios() {
         studioService.deleteAllStudios();
         return new ResponseEntity<Studio>(HttpStatus.NO_CONTENT);
+    }
+
+    @GET
+    @Path("/error")
+    public ResponseEntity<Studio> getServerError() throws Throwable {
+        throw new Throwable("Did you asked me for some errors? I have one");
     }
 
 }

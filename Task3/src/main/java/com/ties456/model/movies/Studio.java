@@ -1,5 +1,7 @@
 package com.ties456.model.movies;
 
+import com.ties456.model.Movie;
+
 import java.util.List;
 
 /**
@@ -11,9 +13,17 @@ public class Studio {
     private String name;
     private List<Movie> movies;
 
+    public Studio() {}
+
     public Studio(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Studio(long id, String name, List<Movie> movies) {
+        this.id = id;
+        this.name = name;
+        this.movies = movies;
     }
 
     public long getId() {

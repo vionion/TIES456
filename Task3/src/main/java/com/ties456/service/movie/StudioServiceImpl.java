@@ -4,6 +4,7 @@ import com.ties456.model.movies.Studio;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @Transactional
 public class StudioServiceImpl implements StudioService {
 
-    private static final List<Studio> studios = Arrays.asList(new Studio(1, "Dreamworks"), new Studio(2, "Warner bros."));
+    private static final List<Studio> studios = new ArrayList<Studio>(Arrays.asList(new Studio(1, "Dreamworks"), new Studio(2, "Warner bros.")));
 
     @Override
     public List<Studio> getAll() {
@@ -56,7 +57,6 @@ public class StudioServiceImpl implements StudioService {
                 iter.remove();
             }
         }
-
     }
 
     @Override
