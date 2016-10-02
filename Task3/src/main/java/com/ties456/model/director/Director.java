@@ -23,14 +23,6 @@ public class Director {
 
     private List<Link> links = new ArrayList<>();
 
-    public Director(int id, String name, int birthYear, List<Integer> movieIdList, List<Award> awards) {
-        this.id = id;
-        this.name = name;
-        this.birthYear = birthYear;
-        this.movieIdList = movieIdList;
-        this.awards = awards;
-    }
-
     public int getId() {
         return id;
     }
@@ -77,5 +69,12 @@ public class Director {
 
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+
+    public void addLink(String url, String rel){
+        Link link = new Link();
+        link.setHref(url);
+        link.setRel(rel);
+        links.add(link);
     }
 }

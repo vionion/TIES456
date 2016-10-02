@@ -2,14 +2,15 @@ package com.ties456.service.director;
 
 import com.ties456.model.director.Director;
 import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+//import org.springframework.transaction.annotation.Transactional;
+
 /**
- * Created by V.Tsybulko on 30.09.2016.
+ * Created by chinhnk on 10/2/2016.
  */
 @Service("studioService")
 //@Transactional
@@ -23,7 +24,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Director getById(long id) {
+    public Director getById(int id) {
         for (Director studio : directors) {
             if (studio.getId() == id) {
                 return studio;
@@ -33,7 +34,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public boolean isDirectorExist(long id) {
+    public boolean isDirectorExist(int id) {
         return getById(id) != null;
     }
 
@@ -49,7 +50,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public void deleteDirectorById(long id) {
+    public void deleteDirectorById(int id) {
         Iterator<Director> iter = directors.iterator();
         while (iter.hasNext()) {
             if (iter.next().getId() == id) {

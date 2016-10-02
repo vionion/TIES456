@@ -1,6 +1,7 @@
 package com.ties456.resources;
 
 
+import com.ties456.common.Constants;
 import com.ties456.error.exception.MyNotFoundException;
 import com.ties456.model.movie.Movie;
 import com.ties456.service.movie.MovieService;
@@ -31,7 +32,7 @@ public class MoviesResource {
 
     @GET
     @Path("/{id}")
-    public Movie getOne(@PathParam("id") long id) {
+    public Movie getOne(@PathParam("id") int id) {
         Movie result = movieService.getById(id);
         if (result == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -51,7 +52,7 @@ public class MoviesResource {
 
     @POST
     @Path("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathParam("id") long id, @RequestBody Movie movieToUpdate) {
+    public ResponseEntity<Movie> updateMovie(@PathParam("id") int id, @RequestBody Movie movieToUpdate) {
         Movie currentMovie = movieService.getById(id);
         if (currentMovie == null) {
             return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
@@ -63,7 +64,7 @@ public class MoviesResource {
 
     @DELETE
     @Path("/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathParam("id") long id) {
+    public ResponseEntity<Movie> deleteMovie(@PathParam("id") int id) {
         if (id < 0) {
             throw new MyNotFoundException("Dude, try to be more positive!");
         }
@@ -87,5 +88,10 @@ public class MoviesResource {
     public ResponseEntity<Movie> getServerError() throws Throwable {
         throw new Throwable("Did you asked me for some errors? I have one");
     }
+
+    @GET
+    @Path("/{" + Constants.MOVIE_ID + "}/reviews")
+    public ReviewResource getReviewResource(){
+        return new ReviewResource(); }
 
 }

@@ -2,7 +2,7 @@ package com.ties456.service.movie;
 
 import com.ties456.model.movie.Movie;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by V.Tsybulko on 30.09.2016.
  */
 @Service("movieService")
-@Transactional
+//@Transactional
 public class MovieServiceImpl implements MovieService {
 
     private static final List<Movie> movies = new ArrayList<Movie>(Arrays.asList(new Movie(1, "Harry Potter"), new Movie(2, "Star Wars")));
@@ -24,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie getById(long id) {
+    public Movie getById(int id) {
         for (Movie movie : movies) {
             if (movie.getId() == id) {
                 return movie;
@@ -34,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public boolean isMovieExist(long id) {
+    public boolean isMovieExist(int id) {
         return getById(id) != null;
     }
 
@@ -50,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteMovieById(long id) {
+    public void deleteMovieById(int id) {
         Iterator<Movie> iter = movies.iterator();
         while (iter.hasNext()) {
             if (iter.next().getId() == id) {
