@@ -2,41 +2,30 @@ package com.ties456.resources;
 
 
 import com.ties456.common.Constants;
-import com.ties456.model.Director;
-import com.ties456.model.Movie;
-import com.ties456.model.movies.Studio;
-import com.ties456.service.DirectorService;
-import com.ties456.service.DirectorServiceImpl;
-import com.ties456.service.MovieService;
-import com.ties456.service.movie.StudioService;
-import com.ties456.service.movie.StudioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ties456.model.director.Director;
+import com.ties456.model.movie.Movie;
+import com.ties456.service.director.DirectorService;
+import com.ties456.service.director.DirectorServiceImpl;
+import com.ties456.service.movie.MovieService;
+import com.ties456.service.movie.MovieServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
-@Path("/studio")
+@Path("/search")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Controller
 public class SearchResource {
 
-    @Autowired
-    private StudioService studioService = new StudioServiceImpl();
-    @Autowired
-    private MovieService movieService;
-    @Autowired
+    private MovieService studioService = new MovieServiceImpl();
     private DirectorService directorService = new DirectorServiceImpl();
 
     @GET
@@ -52,7 +41,9 @@ public class SearchResource {
                     return new ResponseEntity<List<Object>>(HttpStatus.BAD_REQUEST);
                 }
 
-                List<Movie> movieList = movieService.get(name, releaseYear);
+//          Just temporary before merge
+                List<Movie> movieList = new LinkedList<Movie>();
+//                List<Movie> movieList = movieService.get(name, releaseYear);
                 List<Object> resultList = new ArrayList();
 
                 for (Movie movie : movieList) {

@@ -2,19 +2,13 @@ package com.ties456.resources;
 
 
 import com.ties456.error.exception.MyNotFoundException;
-import com.ties456.model.movies.Studio;
-import com.ties456.service.DirectorService;
-import com.ties456.service.MovieService;
-import com.ties456.service.movie.StudioService;
-import com.ties456.service.movie.StudioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ties456.model.movie.Movie;
+import com.ties456.service.movie.MovieService;
+import com.ties456.service.movie.MovieServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -22,28 +16,23 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/studio")
+@Path("/movie")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Controller
 public class MoviesResource {
 
-    @Autowired
-    private StudioService studioService = new StudioServiceImpl();
-    @Autowired
-    private MovieService movieService;
-    @Autowired
-    private DirectorService actorService;
+    private MovieService movieService = new MovieServiceImpl();
 
     @GET
-    public List<Studio> getAll() {
-        return studioService.getAll();
+    public List<Movie> getAll() {
+        return movieService.getAll();
     }
 
     @GET
     @Path("/{id}")
-    public Studio getOne(@PathParam("id") long id) {
-        Studio result = studioService.getById(id);
+    public Movie getOne(@PathParam("id") long id) {
+        Movie result = movieService.getById(id);
         if (result == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         } else {
@@ -52,50 +41,50 @@ public class MoviesResource {
     }
 
     @PUT
-    public ResponseEntity<Studio> createStudio(@RequestBody Studio studio) {
-        if (studioService.isStudioExist(studio.getId())) {
-            return new ResponseEntity<Studio>(HttpStatus.CONFLICT);
+    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+        if (movieService.isMovieExist(movie.getId())) {
+            return new ResponseEntity<Movie>(HttpStatus.CONFLICT);
         }
-        Studio result = studioService.saveStudio(studio);
-        return new ResponseEntity<Studio>(result, HttpStatus.CREATED);
+        Movie result = movieService.saveMovie(movie);
+        return new ResponseEntity<Movie>(result, HttpStatus.CREATED);
     }
 
     @POST
     @Path("/{id}")
-    public ResponseEntity<Studio> updateStudio(@PathParam("id") long id, @RequestBody Studio studioToUpdate) {
-        Studio currentStudio = studioService.getById(id);
-        if (currentStudio == null) {
-            return new ResponseEntity<Studio>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Movie> updateMovie(@PathParam("id") long id, @RequestBody Movie movieToUpdate) {
+        Movie currentMovie = movieService.getById(id);
+        if (currentMovie == null) {
+            return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
         }
-        currentStudio.setName(studioToUpdate.getName());
-        studioService.updateStudio(currentStudio);
-        return new ResponseEntity<Studio>(currentStudio, HttpStatus.OK);
+        currentMovie.setName(movieToUpdate.getName());
+        movieService.updateMovie(currentMovie);
+        return new ResponseEntity<Movie>(currentMovie, HttpStatus.OK);
     }
 
     @DELETE
     @Path("/{id}")
-    public ResponseEntity<Studio> deleteStudio(@PathParam("id") long id) {
+    public ResponseEntity<Movie> deleteMovie(@PathParam("id") long id) {
         if (id < 0) {
             throw new MyNotFoundException("Dude, try to be more positive!");
         }
-        Studio studio = studioService.getById(id);
-        if (studio == null) {
-            throw new MyNotFoundException("There is no studio with such strange id");
-//            return new ResponseEntity<Studio>(HttpStatus.NOT_FOUND);
+        Movie movie = movieService.getById(id);
+        if (movie == null) {
+            throw new MyNotFoundException("There is no movie with such strange id");
+//            return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
         }
-        studioService.deleteStudioById(id);
-        return new ResponseEntity<Studio>(HttpStatus.NO_CONTENT);
+        movieService.deleteMovieById(id);
+        return new ResponseEntity<Movie>(HttpStatus.NO_CONTENT);
     }
 
     @DELETE
-    public ResponseEntity<Studio> deleteAllStudios() {
-        studioService.deleteAllStudios();
-        return new ResponseEntity<Studio>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Movie> deleteAllMovies() {
+        movieService.deleteAllMovies();
+        return new ResponseEntity<Movie>(HttpStatus.NO_CONTENT);
     }
 
     @GET
     @Path("/error")
-    public ResponseEntity<Studio> getServerError() throws Throwable {
+    public ResponseEntity<Movie> getServerError() throws Throwable {
         throw new Throwable("Did you asked me for some errors? I have one");
     }
 

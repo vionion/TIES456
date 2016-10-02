@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class MyGenericExceptionMapper implements ExceptionMapper<Throwable> {
     @Override
     public Response toResponse(Throwable ex){
-        ApiError errorMessage = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), Arrays.stream(ex.getStackTrace()).map(th -> toString()).collect(Collectors.toList()));
+        ApiError errorMessage = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
         return Response.status(Status.INTERNAL_SERVER_ERROR)
                 .entity(errorMessage)
                 .build();
