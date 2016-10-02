@@ -1,6 +1,6 @@
 package com.ties456.service.movie;
 
-import com.ties456.model.movies.Movie;
+import com.ties456.model.Movie;
 
 import java.util.List;
 
