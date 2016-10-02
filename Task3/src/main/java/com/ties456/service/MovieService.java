@@ -1,4 +1,4 @@
-package com.ties456.service.movie;
+package com.ties456.service;
 
 import com.ties456.model.Movie;
 
@@ -22,5 +22,6 @@ public interface MovieService {
     void deleteMovieById(long id);
 
     void deleteAllMovies();
-    
+
+    List<Movie> get(String name, Integer releaseYear);
 }

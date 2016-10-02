@@ -2,8 +2,8 @@ package com.ties456.resources;
 
 
 import com.ties456.model.movies.Studio;
-import com.ties456.service.PersonService;
-import com.ties456.service.movie.MovieService;
+import com.ties456.service.DirectorService;
+import com.ties456.service.MovieService;
 import com.ties456.service.movie.StudioService;
 import com.ties456.service.movie.StudioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class MoviesResource {
     @Autowired
     private MovieService movieService;
     @Autowired
-    private PersonService actorService;
+    private DirectorService actorService;
 
     @GET
     @Path("/")
