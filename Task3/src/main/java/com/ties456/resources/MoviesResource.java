@@ -58,6 +58,9 @@ public class MoviesResource {
             return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
         }
         currentMovie.setName(movieToUpdate.getName());
+        currentMovie.setLinks(movieToUpdate.getLinks());
+        currentMovie.setReleaseYear(movieToUpdate.getReleaseYear());
+        currentMovie.setReviews(movieToUpdate.getReviews());
         movieService.updateMovie(currentMovie);
         return new ResponseEntity<Movie>(currentMovie, HttpStatus.OK);
     }
