@@ -1,4 +1,4 @@
-package com.ties456.service;
+package com.ties456.service.award;
 
 import com.ties456.model.award.Award;
 
@@ -23,5 +23,5 @@ public interface AwardService {
 
     void deleteAllAwards();
 
-    List<Award> get(String name, Integer releaseYear);
+    List<Award> searchByName(String name);
 }

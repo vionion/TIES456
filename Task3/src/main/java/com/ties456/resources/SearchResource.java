@@ -5,13 +5,14 @@ import com.ties456.model.award.Award;
 import com.ties456.model.director.Director;
 import com.ties456.model.movie.Movie;
 import com.ties456.model.review.Review;
-import com.ties456.service.AwardService;
+import com.ties456.service.award.AwardService;
+import com.ties456.service.award.AwardServiceImpl;
 import com.ties456.service.director.DirectorService;
 import com.ties456.service.director.DirectorServiceImpl;
 import com.ties456.service.movie.MovieService;
 import com.ties456.service.movie.MovieServiceImpl;
 import com.ties456.service.review.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ties456.service.review.ReviewServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Path("/search")
@@ -30,41 +32,24 @@ public class SearchResource {
 
     private MovieService movieService = new MovieServiceImpl();
     private DirectorService directorService = new DirectorServiceImpl();
-    @Autowired
-    private AwardService awardService;
-    @Autowired
-    private ReviewService reviewService;
+    private AwardService awardService = new AwardServiceImpl();
+    private ReviewService reviewService = new ReviewServiceImpl();
 
     @GET
-    @Path("/search")
     public ResponseEntity<List<Object>> search(@QueryParam("q") String searchQuery) {
         List<Object> resultList = new ArrayList<>();
-
+        String query = searchQuery.toUpperCase();
         List<Director> directorList = directorService.getAll();
-        for (Director director : directorList) {
-            if (director.getName().indexOf(searchQuery) >= 0) {
-                resultList.add(director);
-            }
-        }
+        resultList.addAll(directorList.stream().filter(director -> director.getName().toUpperCase().indexOf(query) >= 0).collect(Collectors.toList()));
         List<Movie> movieList = movieService.getAll();
-        for (Movie movie : movieList) {
-            if (movie.getName().indexOf(searchQuery) >= 0) {
-                resultList.add(movie);
-            }
-        }
+        resultList.addAll(movieList.stream().filter(movie -> movie.getName().toUpperCase().indexOf(query) >= 0).collect(Collectors.toList()));
         List<Review> reviewList = reviewService.getAll();
-        for (Review review : reviewList) {
-            if (review.getTitle().indexOf(searchQuery) >= 0) {
-                resultList.add(review);
-            }
-        }
+        resultList.addAll(reviewList.stream().filter(review -> review.getTitle().toUpperCase().indexOf(query) >= 0).collect(Collectors.toList()));
         List<Award> awardList = awardService.getAll();
-        for (Award award : awardList) {
-            if (award.getName().indexOf(searchQuery) >= 0) {
-                resultList.add(award);
-            }
+        resultList.addAll(awardList.stream().filter(award -> award.getName().toUpperCase().indexOf(query) >= 0).collect(Collectors.toList()));
+        if (resultList.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<List<Object>>(resultList, HttpStatus.FOUND);
     }
     /*public ResponseEntity<List<Object>> search(@QueryParam("mode") Integer mode,
