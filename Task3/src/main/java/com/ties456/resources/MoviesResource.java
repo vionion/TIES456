@@ -91,7 +91,7 @@ public class MoviesResource {
 
     @GET
     @Path("/{" + Constants.MOVIE_ID + "}/reviews")
-    public ReviewResource getReviewResource(){
-        return new ReviewResource(); }
+    public ReviewResource getReviewResource(@PathParam(Constants.MOVIE_ID) int movieId){
+        return new ReviewResource(movieId); }
 
 }

@@ -18,15 +18,20 @@ import java.util.List;
 public class ReviewResource {
     private ReviewService reviewService = new ReviewServiceImpl();
 
+    private long movieId;
+
+    public ReviewResource(long movieId) {
+        this.movieId = movieId;
+    }
+
     @GET
-    public List<Review> getReviews(@PathParam(Constants.MOVIE_ID) int movieId) {
-        return reviewService.getByMovieId(movieId);
+    public List<Review> getReviews() {
+        return reviewService.getByMovieId(this.movieId);
     }
 
     @GET
     @Path("/{" + Constants.REVIEW_ID + "}")
-    public Review getReview(@PathParam(Constants.MOVIE_ID) int movieId,
-                            @PathParam(Constants.REVIEW_ID) int reviewId) {
-        return reviewService.getByMovieIdAndId(movieId, reviewId);
+    public Review getReview(@PathParam(Constants.REVIEW_ID) int reviewId) {
+        return reviewService.getByMovieIdAndId(this.movieId, reviewId);
     }
 }
