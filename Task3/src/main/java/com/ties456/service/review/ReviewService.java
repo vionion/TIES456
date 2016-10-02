@@ -14,11 +14,11 @@ public interface ReviewService {
 
     Review getById(long id);
 
-    List<Review> getByMovieId(int movieId);
+    List<Review> getByMovieId(long movieId);
 
-    Review getByMovieIdAndId(int movieId, long id);
+    Review getByMovieIdAndId(long movieId, long id);
 
-    boolean isReviewExist(int movieId, long id);
+    boolean isReviewExist(long movieId, long id);
 
     boolean isReviewExist(long id);
 
@@ -26,7 +26,7 @@ public interface ReviewService {
 
     void updateReview(Review movie);
 
-    void deleteReviewById(int movieId, long id);
+    void deleteReviewById(long movieId, long id);
 
     void deleteReviewById(long id);
 

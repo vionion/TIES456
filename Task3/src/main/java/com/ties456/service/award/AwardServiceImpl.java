@@ -1,8 +1,6 @@
 package com.ties456.service.award;
 
 import com.ties456.model.award.Award;
-import com.ties456.model.movie.Movie;
-import com.ties456.service.award.AwardService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,9 +15,9 @@ import java.util.List;
 public class AwardServiceImpl implements AwardService {
 
     private static final List<Award> awards = Arrays.asList(
-            new Award(1, "Golden Globe", 2004),
-            new Award(2, "Oscar", 2011),
-            new Award(2, "Gold palm branch", 2010)
+            new Award(1, 1, "Golden Globe", 2004),
+            new Award(2, 1, "Oscar", 2011),
+            new Award(2, 2, "Gold palm branch", 2010)
     );
 
     @Override
@@ -38,16 +36,31 @@ public class AwardServiceImpl implements AwardService {
     }
 
     @Override
-    public List<Award> searchByName(String name) {
+    public List<Award> getByDirectorId(long directorId) {
         List<Award> result = new ArrayList<>();
         for (Award award : awards) {
-            if (award.getName() == name) {
+            if (award.getDirectorId() == directorId) {
                 result.add(award);
             }
         }
         return result;
     }
-    
+
+    @Override
+    public Award getByDirectorIdAndId(long directorId, long id) {
+        for (Award award : awards) {
+            if ((award.getDirectorId() == directorId) && (award.getId() == id)) {
+                return award;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isAwardExist(long directorId, long id) {
+        return getByDirectorIdAndId(directorId, id) != null;
+    }
+
     @Override
     public boolean isAwardExist(long id) {
         return getById(id) != null;
@@ -61,7 +74,17 @@ public class AwardServiceImpl implements AwardService {
 
     @Override
     public void updateAward(Award award) {
-        awards.set(awards.indexOf(getById(award.getId())), award);
+        awards.set(awards.indexOf(getByDirectorIdAndId(award.getDirectorId(), award.getId())), award);
+    }
+
+    @Override
+    public void deleteAwardById(long directorId, long id) {
+        Iterator<Award> iter = awards.iterator();
+        while (iter.hasNext()) {
+            if ((iter.next().getDirectorId() == directorId) && (iter.next().getId() == id)) {
+                iter.remove();
+            }
+        }
     }
 
     @Override

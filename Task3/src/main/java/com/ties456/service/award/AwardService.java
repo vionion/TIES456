@@ -13,15 +13,21 @@ public interface AwardService {
 
     Award getById(long id);
 
+    List<Award> getByDirectorId(long directorId);
+
+    Award getByDirectorIdAndId(long directorId, long id);
+
+    boolean isAwardExist(long directorId, long id);
+
     boolean isAwardExist(long id);
 
-    Award saveAward(Award movie);
+    Award saveAward(Award director);
 
-    void updateAward(Award movie);
+    void updateAward(Award director);
+
+    void deleteAwardById(long directorId, long id);
 
     void deleteAwardById(long id);
 
     void deleteAllAwards();
-
-    List<Award> searchByName(String name);
 }

@@ -1,6 +1,5 @@
 package com.ties456.service.review;
 
-import com.ties456.model.movie.Movie;
 import com.ties456.model.review.Review;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getByMovieId(int movieId) {
+    public List<Review> getByMovieId(long movieId) {
         List<Review> result = new ArrayList<>();
         for (Review review : reviews) {
             if (review.getMovieId() == movieId) {
@@ -50,7 +49,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review getByMovieIdAndId(int movieId, long id) {
+    public Review getByMovieIdAndId(long movieId, long id) {
         for (Review review : reviews) {
             if ((review.getMovieId() == movieId) && (review.getId() == id)) {
                 return review;
@@ -60,7 +59,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean isReviewExist(int movieId, long id) {
+    public boolean isReviewExist(long movieId, long id) {
         return getByMovieIdAndId(movieId, id) != null;
     }
 
@@ -81,7 +80,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void deleteReviewById(int movieId, long id) {
+    public void deleteReviewById(long movieId, long id) {
         Iterator<Review> iter = reviews.iterator();
         while (iter.hasNext()) {
             if ((iter.next().getMovieId() == movieId) && (iter.next().getId() == id)) {

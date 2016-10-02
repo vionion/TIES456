@@ -6,14 +6,13 @@ package com.ties456.model.award;
 public class Award {
 
     private long id;
+    private long directorId;
     private String name;
     private int year;
 
-    public Award() {
-    }
-
-    public Award(long id, String name, int year) {
+    public Award(long id, long directorId, String name, int year) {
         this.id = id;
+        this.directorId = directorId;
         this.name = name;
         this.year = year;
     }
@@ -24,6 +23,14 @@ public class Award {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getDirectorId() {
+        return directorId;
+    }
+
+    public void setDirectorId(long directorId) {
+        this.directorId = directorId;
     }
 
     public String getName() {
