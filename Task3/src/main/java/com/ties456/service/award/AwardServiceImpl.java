@@ -28,7 +28,7 @@ public class AwardServiceImpl implements AwardService {
     }
 
     @Override
-    public Award getById(int id) {
+    public Award getById(long id) {
         for (Award award : awards) {
             if (award.getId() == id) {
                 return award;
@@ -49,7 +49,7 @@ public class AwardServiceImpl implements AwardService {
     }
     
     @Override
-    public boolean isAwardExist(int id) {
+    public boolean isAwardExist(long id) {
         return getById(id) != null;
     }
 
@@ -65,7 +65,7 @@ public class AwardServiceImpl implements AwardService {
     }
 
     @Override
-    public void deleteAwardById(int id) {
+    public void deleteAwardById(long id) {
         Iterator<Award> iter = awards.iterator();
         while (iter.hasNext()) {
             if (iter.next().getId() == id) {

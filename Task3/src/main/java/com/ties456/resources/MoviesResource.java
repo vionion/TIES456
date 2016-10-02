@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/movie")
+@Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Controller
@@ -32,7 +32,7 @@ public class MoviesResource {
 
     @GET
     @Path("/{id}")
-    public Movie getOne(@PathParam("id") int id) {
+    public Movie getOne(@PathParam("id") long id) {
         Movie result = movieService.getById(id);
         if (result == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
@@ -52,19 +52,22 @@ public class MoviesResource {
 
     @POST
     @Path("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathParam("id") int id, @RequestBody Movie movieToUpdate) {
+    public ResponseEntity<Movie> updateMovie(@PathParam("id") long id, @RequestBody Movie movieToUpdate) {
         Movie currentMovie = movieService.getById(id);
         if (currentMovie == null) {
             return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
         }
         currentMovie.setName(movieToUpdate.getName());
+        currentMovie.setLinks(movieToUpdate.getLinks());
+        currentMovie.setReleaseYear(movieToUpdate.getReleaseYear());
+        currentMovie.setReviews(movieToUpdate.getReviews());
         movieService.updateMovie(currentMovie);
         return new ResponseEntity<Movie>(currentMovie, HttpStatus.OK);
     }
 
     @DELETE
     @Path("/{id}")
-    public ResponseEntity<Movie> deleteMovie(@PathParam("id") int id) {
+    public ResponseEntity<Movie> deleteMovie(@PathParam("id") long id) {
         if (id < 0) {
             throw new MyNotFoundException("Dude, try to be more positive!");
         }

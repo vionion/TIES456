@@ -1,5 +1,6 @@
 package com.ties456.service.review;
 
+import com.ties456.model.movie.Movie;
 import com.ties456.model.review.Review;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,16 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public Review getById(long id) {
+        for (Review review : reviews) {
+            if (review.getId() == id) {
+                return review;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<Review> getByMovieId(int movieId) {
         List<Review> result = new ArrayList<>();
         for (Review review : reviews) {
@@ -39,7 +50,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review getByMovieIdAndId(int movieId, int id) {
+    public Review getByMovieIdAndId(int movieId, long id) {
         for (Review review : reviews) {
             if ((review.getMovieId() == movieId) && (review.getId() == id)) {
                 return review;
@@ -49,8 +60,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public boolean isReviewExist(int movieId, int id) {
+    public boolean isReviewExist(int movieId, long id) {
         return getByMovieIdAndId(movieId, id) != null;
+    }
+
+    @Override
+    public boolean isReviewExist(long id) {
+        return getById(id) != null;
     }
 
     @Override
@@ -65,10 +81,20 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void deleteReviewById(int movieId, int id) {
+    public void deleteReviewById(int movieId, long id) {
         Iterator<Review> iter = reviews.iterator();
         while (iter.hasNext()) {
             if ((iter.next().getMovieId() == movieId) && (iter.next().getId() == id)) {
+                iter.remove();
+            }
+        }
+    }
+
+    @Override
+    public void deleteReviewById(long id) {
+        Iterator<Review> iter = reviews.iterator();
+        while (iter.hasNext()) {
+            if (iter.next().getId() == id) {
                 iter.remove();
             }
         }

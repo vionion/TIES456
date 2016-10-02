@@ -24,7 +24,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Director getById(int id) {
+    public Director getById(long id) {
         for (Director studio : directors) {
             if (studio.getId() == id) {
                 return studio;
@@ -34,7 +34,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public boolean isDirectorExist(int id) {
+    public boolean isDirectorExist(long id) {
         return getById(id) != null;
     }
 
@@ -50,7 +50,7 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public void deleteDirectorById(int id) {
+    public void deleteDirectorById(long id) {
         Iterator<Director> iter = directors.iterator();
         while (iter.hasNext()) {
             if (iter.next().getId() == id) {

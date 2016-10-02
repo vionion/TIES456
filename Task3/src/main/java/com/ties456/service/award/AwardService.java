@@ -11,15 +11,15 @@ public interface AwardService {
 
     List<Award> getAll();
 
-    Award getById(int id);
+    Award getById(long id);
 
-    boolean isAwardExist(int id);
+    boolean isAwardExist(long id);
 
     Award saveAward(Award movie);
 
     void updateAward(Award movie);
 
-    void deleteAwardById(int id);
+    void deleteAwardById(long id);
 
     void deleteAllAwards();
 
