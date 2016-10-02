@@ -73,8 +73,7 @@ public class DirectorsResource {
         }
         Director director = directorService.getById(id);
         if (director == null) {
-            throw new MyNotFoundException("There is no director with such strange id");
-//            return new ResponseEntity<Director>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Director>(HttpStatus.NOT_FOUND);
         }
         directorService.deleteDirectorById(id);
         return new ResponseEntity<Director>(HttpStatus.NO_CONTENT);
@@ -84,12 +83,6 @@ public class DirectorsResource {
     public ResponseEntity<Director> deleteAllDirectors() {
         directorService.deleteAllDirectors();
         return new ResponseEntity<Director>(HttpStatus.NO_CONTENT);
-    }
-
-    @GET
-    @Path("/error")
-    public ResponseEntity<Director> getServerError() throws Throwable {
-        throw new Throwable("Did you asked me for some errors? I have one");
     }
 
 }
