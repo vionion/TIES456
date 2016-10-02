@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Movie {
 
-    private int id;
+    private long id;
     private String name;
     private int releaseYear;
 
@@ -21,23 +21,23 @@ public class Movie {
 
     private List<Link> links = new ArrayList<>();
 
-    public Movie(int id, String name, int releaseYear, List<Review> reviews) {
+    public Movie(long id, String name, int releaseYear, List<Review> reviews) {
         this.id = id;
         this.name = name;
         this.releaseYear = releaseYear;
         this.reviews = reviews;
     }
 
-    public Movie(int id, String name) {
+    public Movie(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

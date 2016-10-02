@@ -24,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie getById(int id) {
+    public Movie getById(long id) {
         for (Movie movie : movies) {
             if (movie.getId() == id) {
                 return movie;
@@ -34,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public boolean isMovieExist(int id) {
+    public boolean isMovieExist(long id) {
         return getById(id) != null;
     }
 
@@ -50,7 +50,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteMovieById(int id) {
+    public void deleteMovieById(long id) {
         Iterator<Movie> iter = movies.iterator();
         while (iter.hasNext()) {
             if (iter.next().getId() == id) {

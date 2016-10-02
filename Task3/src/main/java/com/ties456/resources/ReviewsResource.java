@@ -3,6 +3,8 @@ package com.ties456.resources;
 
 import com.ties456.error.exception.MyNotFoundException;
 import com.ties456.model.review.Review;
+import com.ties456.service.review.ReviewService;
+import com.ties456.service.review.ReviewServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/review")
+@Path("/reviews")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Controller

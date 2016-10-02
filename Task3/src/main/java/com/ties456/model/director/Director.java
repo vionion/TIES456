@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Director {
 
-    private int id;
+    private long id;
     private String name;
     private int birthYear;
 
@@ -23,11 +23,11 @@ public class Director {
 
     private List<Link> links = new ArrayList<>();
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

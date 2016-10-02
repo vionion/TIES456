@@ -11,15 +11,15 @@ public interface MovieService {
 
     List<Movie> getAll();
 
-    Movie getById(int id);
+    Movie getById(long id);
 
-    boolean isMovieExist(int id);
+    boolean isMovieExist(long id);
 
     Movie saveMovie(Movie movie);
 
     void updateMovie(Movie movie);
 
-    void deleteMovieById(int id);
+    void deleteMovieById(long id);
 
     void deleteAllMovies();
 

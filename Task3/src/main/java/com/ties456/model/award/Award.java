@@ -5,24 +5,24 @@ package com.ties456.model.award;
  */
 public class Award {
 
-    private int id;
+    private long id;
     private String name;
     private int year;
 
     public Award() {
     }
 
-    public Award(int id, String name, int year) {
+    public Award(long id, String name, int year) {
         this.id = id;
         this.name = name;
         this.year = year;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

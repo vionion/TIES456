@@ -5,20 +5,20 @@ package com.ties456.model.review;
  */
 public class Review {
 
-    private int id;
+    private long id;
     private int movieId;
     private int rating;
     private String title;
     private String details;
 
-    public Review(int id, int movieId, int rating, String title) {
+    public Review(long id, int movieId, int rating, String title) {
         this.id = id;
         this.movieId = movieId;
         this.rating = rating;
         this.title = title;
     }
 
-    public Review(int id, int movieId, int rating, String title, String details) {
+    public Review(long id, int movieId, int rating, String title, String details) {
         this.id = id;
         this.movieId = movieId;
         this.rating = rating;
@@ -26,11 +26,11 @@ public class Review {
         this.details = details;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

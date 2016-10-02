@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 
-@Path("/award")
+@Path("/awards")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Controller
@@ -56,7 +56,8 @@ public class AwardsResource {
         if (currentAward == null) {
             return new ResponseEntity<Award>(HttpStatus.NOT_FOUND);
         }
-        currentAward.set
+        currentAward.setName(awardToUpdate.getName());
+        currentAward.setYear(awardToUpdate.getYear());
         awardService.updateAward(currentAward);
         return new ResponseEntity<Award>(currentAward, HttpStatus.OK);
     }

@@ -12,15 +12,15 @@ public interface DirectorService {
 
     List<Director> getAll();
 
-    Director getById(int id);
+    Director getById(long id);
 
-    boolean isDirectorExist(int id);
+    boolean isDirectorExist(long id);
 
     Director saveDirector(Director person);
 
     void updateDirector(Director person);
 
-    void deleteDirectorById(int id);
+    void deleteDirectorById(long id);
 
     void deleteAllDirectors();
 
