@@ -30,16 +30,16 @@ public class AwardsResource {
 //        return awardService.getAll();
 //    }
 
-    @GET
-    @Path("/{id}")
-    public Award getOne(@PathParam("id") long id) {
-        Award result = awardService.getById(id);
-        if (result == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        } else {
-            return result;
-        }
-    }
+//    @GET
+//    @Path("/{id}")
+//    public Award getOne(@PathParam("id") long id) {
+//        Award result = awardService.getById(id);
+//        if (result == null) {
+//            throw new WebApplicationException(Response.Status.NOT_FOUND);
+//        } else {
+//            return result;
+//        }
+//    }
 
     @PUT
     public ResponseEntity<Award> createAward(@RequestBody Award award) {

@@ -29,16 +29,16 @@ public class ReviewsResource {
 //        return reviewService.getAll();
 //    }
 
-    @GET
-    @Path("/{id}")
-    public Review getOne(@PathParam("id") long id) {
-        Review result = reviewService.getById(id);
-        if (result == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        } else {
-            return result;
-        }
-    }
+//    @GET
+//    @Path("/{id}")
+//    public Review getOne(@PathParam("id") long id) {
+//        Review result = reviewService.getById(id);
+//        if (result == null) {
+//            throw new WebApplicationException(Response.Status.NOT_FOUND);
+//        } else {
+//            return result;
+//        }
+//    }
 
     @PUT
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
