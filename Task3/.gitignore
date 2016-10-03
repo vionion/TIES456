@@ -3,5 +3,6 @@
 /.settings/**
 /.idea
 /out
+/target
 *.iml
 *.eml
