@@ -17,10 +17,10 @@ import java.util.List;
 //@Transactional
 public class ReviewServiceImpl implements ReviewService {
 
-    private static final List<Review> reviews = Arrays.asList(
+    private static final List<Review> reviews = new ArrayList<Review>(Arrays.asList(
             new Review(1, 1, 5, "Awesome"),
             new Review(2, 1, 3, "So so")
-    );
+    ));
 
     @Override
     public List<Review> getAll() {

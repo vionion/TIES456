@@ -89,7 +89,7 @@ public class AwardsResource {
     }
 
     @GET
-    @Path("/{" + Constants.REVIEW_ID + "}")
+    @Path("/{" + Constants.AWARD_ID + "}")
     public Award getAward(@PathParam(Constants.DIRECTOR_ID) long directorId,
                             @PathParam(Constants.AWARD_ID) long awardId) {
         return awardService.getByDirectorIdAndId(directorId, awardId);
