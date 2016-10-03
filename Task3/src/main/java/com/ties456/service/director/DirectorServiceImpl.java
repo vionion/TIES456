@@ -3,7 +3,7 @@ package com.ties456.service.director;
 import com.ties456.model.director.Director;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,11 +12,14 @@ import java.util.List;
 /**
  * Created by chinhnk on 10/2/2016.
  */
-@Service("studioService")
+@Service("directorService")
 //@Transactional
 public class DirectorServiceImpl implements DirectorService {
 
-    private static final List<Director> directors = new ArrayList<>();
+    private static final List<Director> directors = Arrays.asList(
+            new Director(1, "Peter Jackson", 1961),
+            new Director(2, "Christopher Nolan", 1970)
+    );
 
     @Override
     public List<Director> getAll() {
@@ -25,9 +28,9 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public Director getById(long id) {
-        for (Director studio : directors) {
-            if (studio.getId() == id) {
-                return studio;
+        for (Director director : directors) {
+            if (director.getId() == id) {
+                return director;
             }
         }
         return null;
@@ -39,14 +42,14 @@ public class DirectorServiceImpl implements DirectorService {
     }
 
     @Override
-    public Director saveDirector(Director studio) {
-        directors.add(studio);
-        return studio;
+    public Director saveDirector(Director director) {
+        directors.add(director);
+        return director;
     }
 
     @Override
-    public void updateDirector(Director studio) {
-        directors.set(directors.indexOf(getById(studio.getId())), studio);
+    public void updateDirector(Director director) {
+        directors.set(directors.indexOf(getById(director.getId())), director);
     }
 
     @Override
@@ -67,6 +70,16 @@ public class DirectorServiceImpl implements DirectorService {
 
     @Override
     public List<Director> get(String name, Integer birthYear) {
+        return null;
+    }
+
+    @Override
+    public Director getByMovieId(long movieId) {
+        for (Director director : directors) {
+            if (director.getMovieIdList().contains(Long.valueOf(movieId))) {
+                return director;
+            }
+        }
         return null;
     }
 }

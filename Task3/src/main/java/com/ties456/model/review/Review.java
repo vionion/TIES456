@@ -6,19 +6,19 @@ package com.ties456.model.review;
 public class Review {
 
     private long id;
-    private int movieId;
+    private long movieId;
     private int rating;
     private String title;
     private String details;
 
-    public Review(long id, int movieId, int rating, String title) {
+    public Review(long id, long movieId, int rating, String title) {
         this.id = id;
         this.movieId = movieId;
         this.rating = rating;
         this.title = title;
     }
 
-    public Review(long id, int movieId, int rating, String title, String details) {
+    public Review(long id, long movieId, int rating, String title, String details) {
         this.id = id;
         this.movieId = movieId;
         this.rating = rating;
@@ -34,11 +34,11 @@ public class Review {
         this.id = id;
     }
 
-    public int getMovieId() {
+    public long getMovieId() {
         return movieId;
     }
 
-    public void setMovieId(int movieId) {
+    public void setMovieId(long movieId) {
         this.movieId = movieId;
     }
 

@@ -1,9 +1,12 @@
 package com.ties456.model.director;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ties456.common.Constants;
 import com.ties456.model.Link;
 import com.ties456.model.award.Award;
+import com.ties456.resources.DirectorsResource;
 
+import javax.ws.rs.core.UriInfo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +19,14 @@ public class Director {
     private String name;
     private int birthYear;
 
+    public Director(long id, String name, int birthYear) {
+        this.id = id;
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
     @JsonIgnore
-    private List<Integer> movieIdList = new ArrayList<>();
+    private List<Long> movieIdList = new ArrayList<>();
     @JsonIgnore
     private List<Award> awards = new ArrayList<>();
 
@@ -47,11 +56,11 @@ public class Director {
         this.birthYear = birthYear;
     }
 
-    public List<Integer> getMovieIdList() {
+    public List<Long> getMovieIdList() {
         return movieIdList;
     }
 
-    public void setMovieIdList(List<Integer> movieIdList) {
+    public void setMovieIdList(List<Long> movieIdList) {
         this.movieIdList = movieIdList;
     }
 
@@ -76,5 +85,21 @@ public class Director {
         link.setHref(url);
         link.setRel(rel);
         links.add(link);
+    }
+
+    public void addHATEOAS(UriInfo uriInfo) {
+        if (this.links.isEmpty()) {
+            this.addLink(uriInfo.getBaseUriBuilder()
+                    .path(DirectorsResource.class)
+                    .path(Long.toString(this.getId()))
+                    .build()
+                    .toString(), "self");
+            this.addLink(uriInfo.getBaseUriBuilder()
+                    .path(DirectorsResource.class)
+                    .path(DirectorsResource.class, "getAwardsResource")
+                    .resolveTemplate(Constants.DIRECTOR_ID, this.getId())
+                    .build()
+                    .toString(), "awards");
+        }
     }
 }
