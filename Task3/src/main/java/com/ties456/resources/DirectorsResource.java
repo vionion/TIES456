@@ -1,6 +1,7 @@
 package com.ties456.resources;
 
 
+import com.ties456.common.Constants;
 import com.ties456.error.exception.MyNotFoundException;
 import com.ties456.model.director.Director;
 import com.ties456.service.director.DirectorService;
@@ -11,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 
@@ -25,33 +28,44 @@ public class DirectorsResource {
     private DirectorService directorService = new DirectorServiceImpl();
 
     @GET
-    public List<Director> getAll() {
-        return directorService.getAll();
+    public List<Director> getAll(@Context UriInfo uriInfo) {
+        List<Director> resultList = directorService.getAll();
+        for (Director movie : resultList) {
+            movie.addHATEOAS(uriInfo);
+        }
+        return resultList;
     }
 
     @GET
     @Path("/{id}")
-    public Director getOne(@PathParam("id") long id) {
+    public Director getOne(@PathParam("id") long id,
+                           @Context UriInfo uriInfo) {
         Director result = directorService.getById(id);
         if (result == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         } else {
+            result.addHATEOAS(uriInfo);
             return result;
         }
     }
 
+
     @PUT
-    public ResponseEntity<Director> createDirector(@RequestBody Director director) {
+    public ResponseEntity<Director> createDirector(@RequestBody Director director,
+                                                   @Context UriInfo uriInfo) {
         if (directorService.isDirectorExist(director.getId())) {
             return new ResponseEntity<Director>(HttpStatus.CONFLICT);
         }
         Director result = directorService.saveDirector(director);
+        result.addHATEOAS(uriInfo);
         return new ResponseEntity<Director>(result, HttpStatus.CREATED);
     }
 
     @POST
     @Path("/{id}")
-    public ResponseEntity<Director> updateDirector(@PathParam("id") long id, @RequestBody Director directorToUpdate) {
+    public ResponseEntity<Director> updateDirector(@PathParam("id") long id,
+                                                   @RequestBody Director directorToUpdate,
+                                                   @Context UriInfo uriInfo) {
         Director currentDirector = directorService.getById(id);
         if (currentDirector == null) {
             return new ResponseEntity<Director>(HttpStatus.NOT_FOUND);
@@ -61,6 +75,7 @@ public class DirectorsResource {
         currentDirector.setAwards(directorToUpdate.getAwards());
         currentDirector.setLinks(directorToUpdate.getLinks());
         currentDirector.setMovieIdList(directorToUpdate.getMovieIdList());
+        currentDirector.addHATEOAS(uriInfo);
         directorService.updateDirector(currentDirector);
         return new ResponseEntity<Director>(currentDirector, HttpStatus.OK);
     }
@@ -84,5 +99,11 @@ public class DirectorsResource {
         directorService.deleteAllDirectors();
         return new ResponseEntity<Director>(HttpStatus.NO_CONTENT);
     }
+
+    @Path("/{" + Constants.DIRECTOR_ID + "}/awards")
+    public AwardsResource getAwardsResource() {
+        return new AwardsResource();
+    }
+
 
 }

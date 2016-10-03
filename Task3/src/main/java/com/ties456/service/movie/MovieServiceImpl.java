@@ -2,12 +2,12 @@ package com.ties456.service.movie;
 
 import com.ties456.model.movie.Movie;
 import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+//import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by V.Tsybulko on 30.09.2016.
@@ -16,7 +16,9 @@ import java.util.List;
 //@Transactional
 public class MovieServiceImpl implements MovieService {
 
-    private static final List<Movie> movies = new ArrayList<Movie>(Arrays.asList(new Movie(1, "Harry Potter"), new Movie(2, "Star Wars")));
+    private static final List<Movie> movies = Arrays.asList(
+            new Movie(1, "The Lord of the Rings: The Return of the King", 2003, 1),
+            new Movie(2, "Inception", 2010, 2));
 
     @Override
     public List<Movie> getAll() {

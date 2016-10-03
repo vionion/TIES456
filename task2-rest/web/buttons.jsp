@@ -31,7 +31,7 @@
                 if (req.readyState == 4) {
                     callback(req.status, req.responseText);
                 }
-            }
+            };
             return req;
         }
 
@@ -70,8 +70,7 @@
                 req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 req.send(dataString);
             }
-        };
-
+        }
         function getAccountInfo() {
 
             var req = getRequest(function (status, rep) {
@@ -90,7 +89,7 @@
                         column2.textContent = value;
                         line.appendChild(column2);
                         return line;
-                    }
+                    };
                     var cont = document.getElementById("accountInfoContainer");
                     cont.innerHTML = "";
 
@@ -115,8 +114,6 @@
             req.setRequestHeader('Authorization', 'Bearer ' + token);
             req.send();
         }
-        ;
-
         function getFolderMetadata() {
 
             var req = getRequest(function (status, rep) {
@@ -135,7 +132,7 @@
                         column2.textContent = value;
                         line.appendChild(column2);
                         return line;
-                    }
+                    };
                     var cont = document.getElementById("accountInfoContainer");
                     cont.innerHTML = "";
                     for (var i in json.contents) {
@@ -158,13 +155,10 @@
             req.open("GET", "https://api.dropboxapi.com/1/metadata/auto/");
             req.setRequestHeader('Authorization', 'Bearer ' + token);
             req.send();
-        };
-
-
+        }
         function chooseFile() {
             document.getElementById('file').click();
-        };
-
+        }
         function uploadFile() {
             var fileInput = document.getElementById('file');
 
@@ -187,8 +181,7 @@
             req.setRequestHeader('Authorization', 'Bearer ' + token);
             req.send(fileInput.files[0]);
 
-        };
-
+        }
         function search() {
             var query = document.getElementById('searchQuery').value;
 
@@ -208,7 +201,7 @@
                         column2.textContent = value;
                         line.appendChild(column2);
                         return line;
-                    }
+                    };
                     var cont = document.getElementById("accountInfoContainer");
                     cont.innerHTML = "";
                     for (var i in json) {
@@ -232,7 +225,7 @@
             req.open("GET", "https://api.dropboxapi.com/1/search/auto/?query=" + query);
             req.setRequestHeader('Authorization', 'Bearer ' + token);
             req.send();
-        };
+        }
 
     </script>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -257,12 +250,12 @@
         </th></tr>
 
         <tr><th>
-            <button onclick="javascript:getFolderMetadata()">Get root folder metadata</button>
+            <button onclick="getFolderMetadata()">Get root folder metadata</button>
         </th></tr>
 
         <tr><th>
             <input type="text" id="searchQuery">
-            <button onclick="javascript:search()">Search files</button>
+            <button onclick="search()">Search files</button>
         </th></tr>
     </table>
 <table style="visibility:hidden" id="accountInfoContainer">

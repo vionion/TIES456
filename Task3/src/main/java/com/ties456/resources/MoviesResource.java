@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 
@@ -26,33 +28,42 @@ public class MoviesResource {
     private MovieService movieService = new MovieServiceImpl();
 
     @GET
-    public List<Movie> getAll() {
-        return movieService.getAll();
+    public List<Movie> getAll(@Context UriInfo uriInfo) {
+        List<Movie> resultList = movieService.getAll();
+        for (Movie movie : resultList) {
+            movie.addHATEOAS(uriInfo);
+        }
+        return resultList;
     }
 
     @GET
     @Path("/{id}")
-    public Movie getOne(@PathParam("id") long id) {
+    public Movie getOne(@PathParam("id") long id, @Context UriInfo uriInfo) {
         Movie result = movieService.getById(id);
         if (result == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         } else {
+            result.addHATEOAS(uriInfo);
             return result;
         }
     }
 
     @PUT
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie,
+                                             @Context UriInfo uriInfo) {
         if (movieService.isMovieExist(movie.getId())) {
             return new ResponseEntity<Movie>(HttpStatus.CONFLICT);
         }
         Movie result = movieService.saveMovie(movie);
+        result.addHATEOAS(uriInfo);
         return new ResponseEntity<Movie>(result, HttpStatus.CREATED);
     }
 
     @POST
     @Path("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathParam("id") long id, @RequestBody Movie movieToUpdate) {
+    public ResponseEntity<Movie> updateMovie(@PathParam("id") long id,
+                                             @RequestBody Movie movieToUpdate,
+                                             @Context UriInfo uriInfo) {
         Movie currentMovie = movieService.getById(id);
         if (currentMovie == null) {
             return new ResponseEntity<Movie>(HttpStatus.NOT_FOUND);
@@ -61,6 +72,7 @@ public class MoviesResource {
         currentMovie.setLinks(movieToUpdate.getLinks());
         currentMovie.setReleaseYear(movieToUpdate.getReleaseYear());
         currentMovie.setReviews(movieToUpdate.getReviews());
+        currentMovie.addHATEOAS(uriInfo);
         movieService.updateMovie(currentMovie);
         return new ResponseEntity<Movie>(currentMovie, HttpStatus.OK);
     }
@@ -92,9 +104,8 @@ public class MoviesResource {
         throw new Throwable("Did you asked me for some errors? I have one");
     }
 
-    @GET
     @Path("/{" + Constants.MOVIE_ID + "}/reviews")
-    public ReviewResource getReviewResource(@PathParam(Constants.MOVIE_ID) int movieId){
-        return new ReviewResource(movieId); }
-
+    public ReviewsResource getReviewsResource() {
+        return new ReviewsResource();
+    }
 }

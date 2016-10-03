@@ -25,4 +25,6 @@ public interface DirectorService {
     void deleteAllDirectors();
 
     List<Director> get(String name, Integer birthYear);
+
+    Director getByMovieId(long movieId);
 }
