@@ -2,30 +2,38 @@ package com.ties456.model.user;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Created by chinhnk on 10/5/2016.
  */
-public class User implements Principal {
+public class User implements Principal, UserDetails {
 
     private long id;
-    private String userName;
+    private String username;
     private String password;
 
     private String email;
     private String firstName;
     private String lastName;
-    private List<String> role;
+    private List<GrantedAuthorityImpl> authorities;
 
-    public User(long id, String userName, String password, String email, String firstName, String lastName) {
+    public User(long id, String userName, String password, String email, String firstName, String lastName, Authority authority) {
         this.id = id;
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = new ArrayList<>();
+        this.authorities = new ArrayList<GrantedAuthorityImpl>();
+        
+        if (authority != null) {
+        	this.authorities.add(new GrantedAuthorityImpl(authority));
+        }
     }
 
     public long getId() {
@@ -36,14 +44,16 @@ public class User implements Principal {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
-
+    
+    @Override
     public String getPassword() {
         return password;
     }
@@ -76,16 +86,37 @@ public class User implements Principal {
         this.lastName = lastName;
     }
 
-    public List<String> getRole() {
-        return role;
-    }
-
-    public void setRole(List<String> role) {
-        this.role = role;
+    public void addAuthority(GrantedAuthorityImpl authority) {
+        this.authorities.add(authority);
     }
 
     @Override
     public String getName() {
         return this.firstName + " " + this.lastName;
     }
+
+	@Override
+	public Collection<GrantedAuthorityImpl> getAuthorities() {
+		return authorities;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

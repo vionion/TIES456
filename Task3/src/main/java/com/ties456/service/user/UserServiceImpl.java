@@ -1,7 +1,11 @@
 package com.ties456.service.user;
 
+import com.ties456.model.user.Authority;
 import com.ties456.model.user.User;
 import com.ties456.service.user.UserService;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +20,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private static final List<User> users = Arrays.asList(
-            new User(1, "vonion", "mrsipuli", "vonion@vadc.com", "Vitalii", "Tsybulko"),
-            new User(2, "adriendefarge", "debaguette", "adriendefarge@vadc.com", "Adrien", "Defarge"),
-            new User(3, "minhdcle1", "icancanacan", "minhdcle1@vadc.com", "Minh Duc", "Le"),
-            new User(4, "chinhnguyenkim", "idontknow", "chinhnguyenkim@vadc.com", "Chinh", "Nguyen Kim")
+            new User(1, "vonion", "mrsipuli", "vonion@vadc.com", "Vitalii", "Tsybulko", Authority.USER),
+            new User(2, "adriendefarge", "debaguette", "adriendefarge@vadc.com", "Adrien", "Defarge", Authority.USER),
+            new User(3, "minhdcle1", "icancanacan", "minhdcle1@vadc.com", "Minh Duc", "Le", Authority.ADMIN),
+            new User(4, "chinhnguyenkim", "idontknow", "chinhnguyenkim@vadc.com", "Chinh", "Nguyen Kim", Authority.ADMIN)
     );
 
     @Override
@@ -67,4 +71,15 @@ public class UserServiceImpl implements UserService {
     public void deleteAllUsers() {
         users.clear();
     }
+
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+        for (User user : users) {
+            if (user.getUsername() == username) {
+                return user;
+            }
+        }
+        throw new UsernameNotFoundException("Cannot find user " + username);
+	}
 }

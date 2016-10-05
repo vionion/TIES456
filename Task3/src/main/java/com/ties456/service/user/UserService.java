@@ -4,10 +4,12 @@ import com.ties456.model.user.User;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 /**
  * Created by chinhnk on 10/5/2016.
  */
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     List<User> getAll();
 
