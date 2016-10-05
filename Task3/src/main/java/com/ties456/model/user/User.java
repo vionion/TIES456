@@ -1,7 +1,5 @@
 package com.ties456.model.user;
 
-import com.ties456.common.Role;
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;

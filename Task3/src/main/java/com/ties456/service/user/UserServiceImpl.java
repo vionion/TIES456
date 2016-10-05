@@ -1,6 +1,6 @@
 package com.ties456.service.user;
 
-import com.ties456.common.Role;
+import com.ties456.model.user.Role;
 import com.ties456.model.user.User;
 import org.springframework.stereotype.Service;
 

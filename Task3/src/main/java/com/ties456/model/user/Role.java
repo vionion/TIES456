@@ -1,4 +1,4 @@
-package com.ties456.common;
+package com.ties456.model.user;
 
 /**
  * Created by chinhnk on 10/5/2016.
