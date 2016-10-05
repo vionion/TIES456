@@ -1,8 +1,10 @@
 package com.ties456.service.director;
 
 import com.ties456.model.director.Director;
+import com.ties456.model.review.Review;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -16,10 +18,10 @@ import java.util.List;
 //@Transactional
 public class DirectorServiceImpl implements DirectorService {
 
-    private static final List<Director> directors = Arrays.asList(
+    private static final List<Director> directors = new ArrayList<Director>(Arrays.asList(
             new Director(1, "Peter Jackson", 1961),
             new Director(2, "Christopher Nolan", 1970)
-    );
+    ));
 
     @Override
     public List<Director> getAll() {

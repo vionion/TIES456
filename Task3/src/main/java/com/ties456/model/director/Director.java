@@ -19,6 +19,8 @@ public class Director {
     private String name;
     private int birthYear;
 
+    public Director() {}
+
     public Director(long id, String name, int birthYear) {
         this.id = id;
         this.name = name;

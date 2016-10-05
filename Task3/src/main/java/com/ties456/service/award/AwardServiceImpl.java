@@ -1,6 +1,7 @@
 package com.ties456.service.award;
 
 import com.ties456.model.award.Award;
+import com.ties456.model.director.Director;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,11 +15,11 @@ import java.util.List;
 @Service("awardSerice")
 public class AwardServiceImpl implements AwardService {
 
-    private static final List<Award> awards = Arrays.asList(
+    private static final List<Award> awards = new ArrayList<Award>(Arrays.asList(
             new Award(1, 1, "Golden Globe", 2004),
             new Award(2, 1, "Oscar", 2011),
-            new Award(2, 2, "Gold palm branch", 2010)
-    );
+            new Award(3, 2, "Gold palm branch", 2010)
+    ));
 
     @Override
     public List<Award> getAll() {
