@@ -12,7 +12,7 @@ public class Constants {
     public static final String DIRECTOR_ID = "directorId";
     public static final String AWARD_ID = "awardId";
 
-    public static final String ROLE_ADMIN = "admin";
-    public static final String ROLE_USER = "user";
-    public static final String ROLE_GUEST = "guest";
+//    public static final String ROLE_ADMIN = "admin";
+//    public static final String ROLE_USER = "user";
+//    public static final String ROLE_GUEST = "guest";
 }

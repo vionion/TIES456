@@ -1,5 +1,7 @@
 package com.ties456.model.user;
 
+import com.ties456.common.Role;
+
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class User implements Principal {
     private String email;
     private String firstName;
     private String lastName;
-    private List<String> role;
+    private List<Role> roles;
 
     public User(long id, String userName, String password, String email, String firstName, String lastName) {
         this.id = id;
@@ -25,7 +27,17 @@ public class User implements Principal {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = new ArrayList<>();
+        this.roles = new ArrayList<>();
+    }
+
+    public User(long id, String userName, String password, String email, String firstName, String lastName, List<Role> roles) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
     }
 
     public long getId() {
@@ -76,12 +88,12 @@ public class User implements Principal {
         this.lastName = lastName;
     }
 
-    public List<String> getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(List<String> role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
