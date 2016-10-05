@@ -1,7 +1,7 @@
 package com.ties456.service.user;
 
+import com.ties456.common.Role;
 import com.ties456.model.user.User;
-import com.ties456.service.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private static final List<User> users = Arrays.asList(
-            new User(1, "vonion", "mrsipuli", "vonion@vadc.com", "Vitalii", "Tsybulko"),
-            new User(2, "adriendefarge", "debaguette", "adriendefarge@vadc.com", "Adrien", "Defarge"),
-            new User(3, "minhdcle1", "icancanacan", "minhdcle1@vadc.com", "Minh Duc", "Le"),
-            new User(4, "chinhnguyenkim", "idontknow", "chinhnguyenkim@vadc.com", "Chinh", "Nguyen Kim")
-    );
+    private static final List<User> users = new ArrayList<User>(Arrays.asList(
+            new User(1, "vonion", "mrsipuli", "vonion@vadc.com", "Vitalii", "Tsybulko", new ArrayList<Role>(Arrays.asList(Role.ADMIN, Role.USER))),
+            new User(2, "adriendefarge", "debaguette", "adriendefarge@vadc.com", "Adrien", "Defarge", new ArrayList<Role>(Arrays.asList(Role.USER))),
+            new User(3, "minhdcle1", "icancanacan", "minhdcle1@vadc.com", "Minh Duc", "Le", new ArrayList<Role>(Arrays.asList(Role.USER))),
+            new User(4, "chinhnguyenkim", "idontknow", "chinhnguyenkim@vadc.com", "Chinh", "Nguyen Kim", new ArrayList<Role>())
+    ));
 
     @Override
     public List<User> getAll() {
