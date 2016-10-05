@@ -6,8 +6,13 @@ package com.ties456.common;
 public class Constants {
     public static final int SEARCH_MODE_MOVIE = 0;
     public static final int SEARCH_MODE_DIRECTOR = 1;
+
     public static final String MOVIE_ID = "movieId";
     public static final String REVIEW_ID = "reviewId";
     public static final String DIRECTOR_ID = "directorId";
     public static final String AWARD_ID = "awardId";
+
+    public static final String ROLE_ADMIN = "admin";
+    public static final String ROLE_USER = "user";
+    public static final String ROLE_GUEST = "guest";
 }
