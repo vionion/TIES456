@@ -22,9 +22,9 @@ public class User implements Principal, UserDetails {
     private String lastName;
     private List<GrantedAuthorityImpl> authorities;
 
-    public User(long id, String userName, String password, String email, String firstName, String lastName) {
+    public User(long id, String username, String password, String email, String firstName, String lastName) {
         this.id = id;
-        this.username = userName;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -32,9 +32,9 @@ public class User implements Principal, UserDetails {
         this.authorities = new ArrayList<GrantedAuthorityImpl>();
     }
 
-    public User(long id, String userName, String password, String email, String firstName, String lastName, Authority authority) {
+    public User(long id, String username, String password, String email, String firstName, String lastName, Authority authority) {
         this.id = id;
-        this.username = userName;
+        this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
@@ -59,8 +59,8 @@ public class User implements Principal, UserDetails {
         return username;
     }
 
-    public void setUserName(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
     @Override
