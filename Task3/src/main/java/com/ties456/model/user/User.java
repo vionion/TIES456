@@ -20,16 +20,9 @@ public class User implements Principal, UserDetails {
     private String email;
     private String firstName;
     private String lastName;
-    private List<GrantedAuthority> authorities;
+    private List<GrantedAuthorityImpl> authorities;
 
-    public User(long id, String username, String password, String email, String firstName, String lastName) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.authorities = new ArrayList<GrantedAuthority>();
+    public User() {
     }
 
     public User(long id, String username, String password, String email, String firstName, String lastName, Authority authority) {
@@ -39,7 +32,7 @@ public class User implements Principal, UserDetails {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.authorities = new ArrayList<GrantedAuthority>();
+        this.authorities = new ArrayList<GrantedAuthorityImpl>();
 
         if (authority != null) {
             this.authorities.add(new GrantedAuthorityImpl(authority));
@@ -106,11 +99,11 @@ public class User implements Principal, UserDetails {
     }
 
     @Override
-    public Collection<GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthorityImpl> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<GrantedAuthority> authorities) {
+    public void setAuthorities(List<GrantedAuthorityImpl> authorities) {
         this.authorities = authorities;
     }
 

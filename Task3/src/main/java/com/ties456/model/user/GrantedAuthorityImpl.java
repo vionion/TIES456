@@ -6,6 +6,9 @@ public class GrantedAuthorityImpl implements GrantedAuthority {
 
     private String authority;
 
+    public GrantedAuthorityImpl() {
+    }
+
     public GrantedAuthorityImpl(Authority authority) {
 		this.authority = "ROLE_" + authority;
 	}
