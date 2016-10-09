@@ -44,7 +44,7 @@ public class UsersResource {
         }
     }
 
-    @PUT
+    @POST
     public ResponseEntity<User> createUser(@RequestBody User user,
                                            @Context UriInfo uriInfo) {
         if (userService.isUserExist(user.getId())) {
@@ -54,7 +54,7 @@ public class UsersResource {
         return new ResponseEntity<User>(result, HttpStatus.CREATED);
     }
 
-    @POST
+    @PUT
     @Path("/{id}")
     public ResponseEntity<User> updateUser(@PathParam("id") long id,
                                            @RequestBody User userToUpdate,

@@ -10,6 +10,9 @@ public class Award {
     private String name;
     private int year;
 
+    public Award() {
+    }
+
     public Award(long id, long directorId, String name, int year) {
         this.id = id;
         this.directorId = directorId;

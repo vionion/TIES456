@@ -50,7 +50,7 @@ public class DirectorsResource {
     }
 
 
-    @PUT
+    @POST
     public ResponseEntity<Director> createDirector(@RequestBody Director director,
                                                    @Context UriInfo uriInfo) {
         if (directorService.isDirectorExist(director.getId())) {
@@ -61,7 +61,7 @@ public class DirectorsResource {
         return new ResponseEntity<Director>(result, HttpStatus.CREATED);
     }
 
-    @POST
+    @PUT
     @Path("/{id}")
     public ResponseEntity<Director> updateDirector(@PathParam("id") long id,
                                                    @RequestBody Director directorToUpdate,

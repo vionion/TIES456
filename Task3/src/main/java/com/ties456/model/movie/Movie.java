@@ -26,6 +26,9 @@ public class Movie {
 
     private List<Link> links = new ArrayList<>();
 
+    public Movie() {
+    }
+
     public Movie(long id, String name, int releaseYear, long directorId) {
         this.id = id;
         this.name = name;

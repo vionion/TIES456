@@ -11,6 +11,9 @@ public class Review {
     private String title;
     private String details;
 
+    public Review() {
+    }
+
     public Review(long id, long movieId, int rating, String title) {
         this.id = id;
         this.movieId = movieId;

@@ -40,7 +40,7 @@ public class ReviewsResource {
 //        }
 //    }
 
-    @PUT
+    @POST
     public ResponseEntity<Review> createReview(@RequestBody Review review) {
         if (reviewService.isReviewExist(review.getId())) {
             return new ResponseEntity<Review>(HttpStatus.CONFLICT);
@@ -49,7 +49,7 @@ public class ReviewsResource {
         return new ResponseEntity<Review>(result, HttpStatus.CREATED);
     }
 
-    @POST
+    @PUT
     @Path("/{id}")
     public ResponseEntity<Review> updateReview(@PathParam("id") long id, @RequestBody Review reviewToUpdate) {
         Review currentReview = reviewService.getById(id);

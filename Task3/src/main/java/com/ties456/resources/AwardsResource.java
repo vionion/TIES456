@@ -41,7 +41,7 @@ public class AwardsResource {
 //        }
 //    }
 
-    @PUT
+    @POST
     public ResponseEntity<Award> createAward(@RequestBody Award award) {
         if (awardService.isAwardExist(award.getId())) {
             return new ResponseEntity<Award>(HttpStatus.CONFLICT);
@@ -50,7 +50,7 @@ public class AwardsResource {
         return new ResponseEntity<Award>(result, HttpStatus.CREATED);
     }
 
-    @POST
+    @PUT
     @Path("/{id}")
     public ResponseEntity<Award> updateAward(@PathParam("id") long id, @RequestBody Award awardToUpdate) {
         Award currentAward = awardService.getById(id);

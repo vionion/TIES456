@@ -48,7 +48,7 @@ public class MoviesResource {
         }
     }
 
-    @PUT
+    @POST
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie,
                                              @Context UriInfo uriInfo) {
         if (movieService.isMovieExist(movie.getId())) {
@@ -59,7 +59,7 @@ public class MoviesResource {
         return new ResponseEntity<Movie>(result, HttpStatus.CREATED);
     }
 
-    @POST
+    @PUT
     @Path("/{id}")
     public ResponseEntity<Movie> updateMovie(@PathParam("id") long id,
                                              @RequestBody Movie movieToUpdate,
