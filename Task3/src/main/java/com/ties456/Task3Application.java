@@ -65,6 +65,7 @@ public class Task3Application {
                     .antMatchers(HttpMethod.GET, "/directors/**").hasAnyRole(Authority.USER.name(), Authority.ADMIN.name())
                     .antMatchers(HttpMethod.GET, "/movies/**").hasAnyRole(Authority.USER.name(), Authority.ADMIN.name())
                     .antMatchers("/users").hasRole(Authority.ADMIN.name())
+                    .antMatchers("/users/**").hasRole(Authority.ADMIN.name())
                     .antMatchers(HttpMethod.POST, "/**").hasRole(Authority.ADMIN.name())
                     .antMatchers(HttpMethod.PUT, "/**").hasRole(Authority.ADMIN.name())
                     .antMatchers(HttpMethod.DELETE, "/**").hasRole(Authority.ADMIN.name())
