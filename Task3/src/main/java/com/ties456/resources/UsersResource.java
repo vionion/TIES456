@@ -1,7 +1,6 @@
 package com.ties456.resources;
 
 
-import com.ties456.common.Constants;
 import com.ties456.error.exception.MyNotFoundException;
 import com.ties456.model.user.User;
 import com.ties456.service.user.UserService;
@@ -16,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,7 +46,7 @@ public class UsersResource {
 
     @PUT
     public ResponseEntity<User> createUser(@RequestBody User user,
-                                             @Context UriInfo uriInfo) {
+                                           @Context UriInfo uriInfo) {
         if (userService.isUserExist(user.getId())) {
             return new ResponseEntity<User>(HttpStatus.CONFLICT);
         }
@@ -57,8 +57,8 @@ public class UsersResource {
     @POST
     @Path("/{id}")
     public ResponseEntity<User> updateUser(@PathParam("id") long id,
-                                             @RequestBody User userToUpdate,
-                                             @Context UriInfo uriInfo) {
+                                           @RequestBody User userToUpdate,
+                                           @Context UriInfo uriInfo) {
         User currentUser = userService.getById(id);
         if (currentUser == null) {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -68,6 +68,7 @@ public class UsersResource {
         currentUser.setFirstName(userToUpdate.getFirstName());
         currentUser.setLastName(userToUpdate.getLastName());
         currentUser.setEmail(userToUpdate.getEmail());
+        currentUser.setAuthorities(new ArrayList(userToUpdate.getAuthorities()));
 
         userService.updateUser(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);

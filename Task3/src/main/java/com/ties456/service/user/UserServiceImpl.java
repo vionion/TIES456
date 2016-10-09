@@ -71,14 +71,14 @@ public class UserServiceImpl implements UserService {
         users.clear();
     }
 
-	@Override
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
         for (User user : users) {
-            if (user.getUsername() == username) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
         throw new UsernameNotFoundException("Cannot find user " + username);
-	}
+    }
 }

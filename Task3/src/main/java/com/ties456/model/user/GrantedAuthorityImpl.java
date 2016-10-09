@@ -4,10 +4,10 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class GrantedAuthorityImpl implements GrantedAuthority {
 
-	private Authority authority;
-	
-	public GrantedAuthorityImpl(Authority authority) {
-		this.authority = authority;
+    private String authority;
+
+    public GrantedAuthorityImpl(Authority authority) {
+		this.authority = "ROLE_" + authority;
 	}
 	
 	@Override
